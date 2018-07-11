@@ -119,17 +119,31 @@ def game_hash
   }
 end
 
+#Returns a hash of a player names as keys and a hash of various stats as a value.
+def find_players
+  game_hash.collect do |team, about|
+    # binding.pry
+    about[:players]
+  end
+  #return array of all players
+end
+
+puts "#{find_players}"
+#check out merge and flat
+
 # Returns the number of points scored for a particular player based on his/her name.
 def num_points_scored(player_name)
-  result = nil
-  game_hash.each do |team, about|
-    about[:players].each do |name, stats|
+   combined_players = nil
+  game_hash.select do |team, about|
+    about[:players].select do |name, stats|
       if player_name == name
-        result = stats[:points]
+        stats[:points]
       end
     end
+    binding.pry
+    about[:players].keys
   end
-  result
+  # result
 end
 
 #Returns show size of a particular player based on his/her name.
