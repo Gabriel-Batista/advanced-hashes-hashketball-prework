@@ -121,29 +121,14 @@ end
 
 #Returns a hash of a player names as keys and a hash of various stats as a value.
 def find_players
-  game_hash.collect do |team, about|
-    # binding.pry
-    about[:players]
-  end
+  game_hash[:home][:players].merge(game_hash[:away][:players])
   #return array of all players
 end
 
-puts "#{find_players}"
-#check out merge and flat
-
 # Returns the number of points scored for a particular player based on his/her name.
 def num_points_scored(player_name)
-   combined_players = nil
-  game_hash.select do |team, about|
-    about[:players].select do |name, stats|
-      if player_name == name
-        stats[:points]
-      end
-    end
-    binding.pry
-    about[:players].keys
-  end
-  # result
+  # binding.pry
+  find_players[player_name][:points]
 end
 
 #Returns show size of a particular player based on his/her name.
